@@ -44,7 +44,7 @@ class Db{
 
     }
 
-    public function query($sql, $class = 'App\Models\User'){
+    public function query($sql, $class){
         $sth = $this->_db->prepare($sql);
         $res = $sth->execute();
         if(false !== $res) {
