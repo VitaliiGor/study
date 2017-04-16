@@ -28,8 +28,9 @@ class Db{
     private function __clone(){}
 
     public static function getInstance(){
-        if(!self::$_instance)
+        if(!self::$_instance) {
             self::$_instance = new \App\Db();
+        }
         return self::$_instance;
     }
 
