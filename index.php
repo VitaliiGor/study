@@ -1,6 +1,7 @@
 <?php
-// Git 
-//new change
-echo "Hello World!";
+
+require __DIR__ . '/autoload.php';
+
+$db = new \App\Db();
 
 ?>
