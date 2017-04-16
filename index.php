@@ -3,11 +3,12 @@
 require __DIR__ . '/autoload.php';
 
 //$db = new \App\Db();
-$db = \App\Db::getInstance();
+//$db = \App\Db::getInstance();
 //$dbh = $db->getDb();
 
 //$res = $db->execute("INSERT INTO users (name,age,email) VALUES ('John',25,'john@mail.ru')")
-$res = $db->query("SELECT * FROM users WHERE age>20");
+//$res = $db->query("SELECT * FROM users WHERE age>20");
+$res = \App\Models\User::findAll();
 var_dump($res);
 
 
