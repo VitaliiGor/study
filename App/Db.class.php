@@ -39,15 +39,15 @@ class Db{
 
     public function execute($sql){
         $sth = $this->_db->prepare($sql);
-        $res = $sth->execute();
-        return $res;
+        return $sth->execute();
+
     }
 
-    public function query($sql){
+    public function query($sql, $class = 'App\Models\User'){
         $sth = $this->_db->prepare($sql);
         $res = $sth->execute();
         if(false !== $res) {
-            return $sth->fetchAll();
+            return $sth->fetchAll(\PDO::FETCH_CLASS, $class);
         }
         return [];
     }
