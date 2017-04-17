@@ -6,16 +6,38 @@ namespace App;
 abstract class Model
 {
     const TABLE = '';
+    public $id;
 
     public static function findAll(){
-        $db = \App\Db::getInstance();
+        $db = \App\Db::instance();
         return $db->query('SELECT * FROM ' . static::TABLE, static::class);
     }
 
     public static function findById($id){
-        $db = \App\Db::getInstance();
+        $db = \App\Db::instance();
         $res = $db->query('SELECT * FROM ' . static::TABLE . ' WHERE id = ' . $id, static::class);
         return $res[0];
+    }
+
+    public function isNew(){
+        return empty($this->id);
+    }
+
+    public function insert(){
+        if(!$this->isNew())
+            return;
+        $column = [];
+        $values = [];
+        foreach($this as $k => $v){
+            if('id' == $k)
+                continue;
+            $column[] = $k;
+            $values[':'.$k] = $v;
+        }
+        $sql = 'INSERT INTO ' .static::TABLE. ' (' . implode(',', $column) . ') 
+                VALUES (' . implode(',', array_keys($values)) . ')';
+        $db = \App\Db::instance();
+        $db->execute($sql, $values);
     }
 
 

@@ -5,11 +5,12 @@ namespace App;
 
 
 class Db{
+    use Singleton;
+
     const DB_NAME = 'D:/USR/www/myTest.db';
-    static private $_instance = null;
     private $_db;
 
-    private function __construct(){
+    protected function __construct(){
         if(file_exists(self::DB_NAME))
             $this->_db = new \PDO('sqlite:'.self::DB_NAME);
         else{
@@ -27,21 +28,14 @@ class Db{
     }
     private function __clone(){}
 
-    public static function getInstance(){
-        if(!self::$_instance) {
-            self::$_instance = new \App\Db();
-        }
-        return self::$_instance;
-    }
 
     public function getDb(){
         return $this->_db;
     }
 
-    public function execute($sql){
+    public function execute($sql, $params = []){
         $sth = $this->_db->prepare($sql);
-        return $sth->execute();
-
+        return $sth->execute($params);
     }
 
     public function query($sql, $class){

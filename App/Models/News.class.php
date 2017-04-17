@@ -22,7 +22,7 @@ class News extends Model
     }
 
     public function setNews($msg, User $user){
-        $db = \App\Db::getInstance();
+        $db = \App\Db::instance();
         $dbh = $db->getDb();
         return $dbh->query("INSERT INTO " . self::TABLE . " (msg, author, author_id) 
                             VALUES ('$msg', '" . $user->name . "', " . $user->id . ")");
