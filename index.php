@@ -18,13 +18,71 @@ $dbh = $db->getDb();
                               datetime INTEGER
                           )";  */
 //$res = $dbh->query($sql);
-/*$user1 = \App\Models\User::findById(2);
-$news1 = new \App\Models\News();
+$user = \App\Models\User::findById(3);
+/*$news1 = new \App\Models\News();
 $msg = $news1->news = "Hi all people! I love freedom!! I dont like meat and shnaps!I like Spb and Sochi and Gadiykino!!";
 $res = $news1->setNews($msg, $user1);*/
-$user = new \App\Models\User();
+/*$user = new \App\Models\User();
 $user->name = 'Jora';
 $user->email = 'J@mail.do';
-$a = $user->insert();
+$user->age = 31;
+$user->datetime = time();
+$a = $user->insert(); */
+
+/*$news = new \App\Models\News();
+$news->msg = 'I learn PHP too very much!!!!';
+$news->author_id = $user->id; //
+$news->author = $user->name;
+$news->datetime = time();
+$n = $news->insert();*/
+
+$news = \App\Models\News::findAll();
+//var_dump($news[0]->msg);
+
+if($_GET['id'])
+    include 'article.php';
 
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <style>
+        article{
+            width: 500px;
+            margin: 0 0 20px 0;
+            padding: 10px;
+            border: 1px dotted red;
+            font-size: 1.5em;
+        }
+        p{
+            margin: 0;
+            float: left;
+        }
+        a{
+            position: relative;
+            margin-left: 200px;
+        }
+    </style>
+</head>
+<body>
+<h1>All news:</h1>
+<?php
+foreach($news as $n){
+    $dt = date('d-m-Y H:i', ($n->datetime));
+    echo <<<EOF
+<p>Author: <b>{$n->author}</b>, $dt</p>
+<a href="article.php?id={$n->id}">Read more</a>
+<article>
+{$n->msg}
+</article>
+
+EOF;
+}
+
+?>
+
+</body>
+</html>

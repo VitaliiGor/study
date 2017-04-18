@@ -10,6 +10,8 @@ class User extends Model
 
     public $name;
     public $email;
+    public $age;
+    public $datetime;
 
 
 

@@ -13,8 +13,11 @@ class News extends Model
 {
     const TABLE = 'news';
 
-    public $news;
+    public $msg;
+    public $author_id;
     public $author;
+    public $datetime;
+
 
     function __construct()
     {
