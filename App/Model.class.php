@@ -38,6 +38,34 @@ abstract class Model
                 VALUES (' . implode(',', array_keys($values)) . ')';
         $db = \App\Db::instance();
         $db->execute($sql, $values);
+        $this->id = $db->getDb()->lastInsertId();
+    }
+
+    public function update(){
+        $column = [];
+        $values = [];
+        foreach($this as $k=>$v){
+            if('id' == $k)
+                continue;
+            $column[] = $k.' = :'.$k;
+            $values[':'.$k] = $v;
+        }
+        $sql = 'UPDATE ' .static::TABLE. ' SET ' .implode(', ', $column). ' 
+                WHERE id = ' .$this->id;
+        //var_dump($sql);
+        //die();
+        $db = \App\Db::instance();
+        $db->execute($sql, $values);
+    }
+
+    public function save(){
+        if($this->isNew())
+            return $this->insert();
+        return $this->update();
+    }
+
+    public function delete(){
+
     }
 
 

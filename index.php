@@ -39,7 +39,7 @@ $n = $news->insert();*/
 $news = \App\Models\News::findAll();
 //var_dump($news[0]->msg);
 
-if($_GET['id'])
+    if($_GET['id'])
     include 'article.php';
 
 ?>
