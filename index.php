@@ -59,11 +59,15 @@ $news = \App\Models\News::findAll();
         }
         p{
             margin: 0;
+            position: absolute;
             float: left;
         }
-        a{
+        span{
             position: relative;
-            margin-left: 200px;
+            margin-left: 300px;
+        }
+        a{
+            margin-left: 50px;
         }
     </style>
 </head>
@@ -74,7 +78,10 @@ foreach($news as $n){
     $dt = date('d-m-Y H:i', ($n->datetime));
     echo <<<EOF
 <p>Author: <b>{$n->author}</b>, $dt</p>
+<span>
 <a href="article.php?id={$n->id}">Read more</a>
+<a href="test.php?del={$n->id}">Delete</a>
+</span>
 <article>
 {$n->msg}
 </article>

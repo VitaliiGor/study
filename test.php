@@ -7,19 +7,24 @@
  */
 require __DIR__ . '/autoload.php';
 
-/*$user = new \App\Models\User();
-//$user->id =7 ;
-$user->name = 'Vanya';
+//$user = new \App\Models\User();
+//$user->id = 14 ;
+/*$user->name = 'Vanya';
 $user->email = 'vano@mail.bl';
 $user->age = 30;
-$user->datetime = time();
-$a = $user->save();
-echo $user->id;
-*/
-$con = \App\Config::instance();
-$con->setConfig('db2', 'mySql');
-var_dump($con->getConfig('db2'));
+$user->datetime = time();*/
+//$a = $user->delete();
 
+/*$con = \App\Config::instance();
+$con->setConfig('db2', 'mySql');
+var_dump($con->getConfig('db2'));*/
+
+if($_GET['del']){
+    $id = abs((int)$_GET['del']);
+    $ndel = \App\Models\News::findById($id);
+    $ndel->delete();
+    header('location: index.php');
+}
 
 
 ?>
