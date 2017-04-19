@@ -19,7 +19,7 @@
     <![endif]-->
 </head>
 <body>
-<h1>Last news!</h1>
+<h1><?php echo $this->title; ?></h1>
 <?php foreach($this->news as $n) {
     $dt=date('d-m-Y H:i', ($n->datetime));
     echo <<<EOF
