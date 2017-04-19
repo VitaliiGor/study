@@ -1,4 +1,5 @@
 <?php
+session_start();
 /**
  * Created by PhpStorm.
  * User: V
@@ -23,6 +24,14 @@ if($_GET['del']){
     $id = abs((int)$_GET['del']);
     $ndel = \App\Models\News::findById($id);
     $ndel->delete();
+    header('location: index.php');
+}
+if($_POST['text']) {
+    $id = abs((int)$_SESSION['n_id']);
+	echo 'id: '.$id.' text: '.$_POST['text'];
+    $n = \App\Models\News::findById($id);
+    $n->msg = $_POST['text'];
+    $n->update();
     header('location: index.php');
 }
 
