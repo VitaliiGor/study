@@ -22,9 +22,10 @@
 <h1><?php echo $this->title; ?></h1>
 <?php foreach($this->news as $n) {
     $dt=date('d-m-Y H:i', ($n->datetime));
+    if(!empty($n->author)){$auth = $n->author->name;}
     echo <<<EOF
 <div class="panel panel-default">
-    <div class="panel-heading">Author: {$n->author}, date: $dt</div>
+    <div class="panel-heading">Author: $auth, date: $dt</div>
     <div class="panel-body">News: {$n->msg}</div>
 </div>
 EOF;

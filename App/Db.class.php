@@ -38,9 +38,10 @@ class Db{
         return $sth->execute($params);
     }
 
-    public function query($sql, $class){
+    public function query($sql,$params = [], $class){
         $sth = $this->_db->prepare($sql);
-        $res = $sth->execute();
+
+        $res = $sth->execute($params);
         if(false !== $res) {
             return $sth->fetchAll(\PDO::FETCH_CLASS, $class);
         }

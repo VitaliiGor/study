@@ -9,26 +9,44 @@
 namespace App\Models;
 
 use App\Model;
+/** LAZY LOAD
+ *
+ * &property \App\Models\News $author
+ */
 class News extends Model
 {
     const TABLE = 'news';
 
+
     public $msg;
     public $author_id;
-    public $author;
     public $datetime;
 
-
-    function __construct()
+    public function __get($name)
     {
+        switch($name){
+            case 'author': return User::findById($this->author_id);
+            break;
+            default: return null;
 
+        }
     }
 
-    public function setNews($msg, User $user){
-        $db = \App\Db::instance();
-        $dbh = $db->getDb();
-        return $dbh->query("INSERT INTO " . self::TABLE . " (msg, author, author_id) 
-                            VALUES ('$msg', '" . $user->name . "', " . $user->id . ")");
+    public function __set($name, $value){
+        switch($name){
+            case 'author': $this->$name = $value;
+                break;
+            default: ;
+
+        }
+    }
+
+    public function __isset($name)
+    {  switch($name){
+        case 'author': return true; //: return !empty($this->author_id);
+            break;
+        default: return false;
+        }
     }
 
 }

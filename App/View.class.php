@@ -24,7 +24,12 @@ class View
 
     public function __isset($name)
     {
-        // TODO: Implement __isset() method.
+        foreach($this->data as $prop => $value){
+            if($prop == $name){
+                return true;
+            }
+            return false;
+        }
     }
 
     public function render($template){

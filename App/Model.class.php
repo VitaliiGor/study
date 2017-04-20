@@ -10,12 +10,16 @@ abstract class Model
 
     public static function findAll(){
         $db = \App\Db::instance();
-        return $db->query('SELECT * FROM ' . static::TABLE, static::class);
+        return $db->query('SELECT * FROM ' . static::TABLE,
+                            [],
+                            static::class);
     }
 
     public static function findById($id){
         $db = \App\Db::instance();
-        $res = $db->query('SELECT * FROM ' . static::TABLE . ' WHERE id = ' . $id, static::class);
+        $res = $db->query('SELECT * FROM ' . static::TABLE . ' WHERE id = :id ',
+                            [ ':id' => $id ],
+                            static::class);
         return $res[0];
     }
 

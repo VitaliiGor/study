@@ -35,5 +35,9 @@ if($_POST['text']) {
     header('location: index.php');
 }
 
+$n1 = \App\Models\News::findById(5);
+
+var_dump($n1);
+var_dump($n1->author->name);
 
 ?>
